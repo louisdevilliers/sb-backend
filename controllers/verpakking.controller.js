@@ -1,0 +1,65 @@
+const db = require("../models");
+const Verpakking = db.verpakkings;
+const Op = db.Sequelize.Op;
+
+// Create and Save a new Verpakking
+exports.create = (req, res) => {
+  // Validate request
+  if (!req.body.naam) {
+    res.status(400).send({
+      message: "Content can not be empty!"
+    });
+    return;
+  }
+  // Create a Verpakking
+  const verpakking = {
+    naam: req.body.naam,
+    prys: req.body.prys,
+           
+  };
+  // Stack Verpakking in the database
+  Verpakking.create(verpakking)
+    .then(data => {
+      res.send(data);
+    })
+    .catch(err => {
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while creating the Verpakking."
+      });
+    });
+};
+// Retrieve all Verkopes from the database.
+exports.findAll = (req, res) => {
+    const naam = req.query.naam;
+    var condition = naam ? { naam: { [Op.like]: `%${naam}%` } } : null;
+    Verpakking.findAll({ where: condition })
+      .then(data => {
+        res.send(data);
+      })
+      .catch(err => {
+        res.status(500).send({
+          message:
+            err.message || "Some error occurred while retrieving Roete."
+        });
+      });
+};
+// Find a single Prys with an id
+exports.findOne = (req, res) => {
+    const id = req.params.id;
+    Verpakking.findByPk(id)
+      .then(data => {
+        if (data) {
+          res.send(data);
+        } else {
+          res.status(404).send({
+            message: `Cannot find Prys with id=${id}.`
+          });
+        }
+      })
+      .catch(err => {
+        res.status(500).send({
+          message: "Error retrieving Prys with id=" + id
+        });
+      });
+};
