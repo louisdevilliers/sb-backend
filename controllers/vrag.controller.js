@@ -1,9 +1,8 @@
-const db = require("../models");
-const Vrag = db.vragte;
-const Op = db.Sequelize.Op;
+import db from "../models/index.js"; 
+const { vragte: Vrag, Sequelize: { Op } } = db;
 
 // Create and Save a new Vrag
-exports.create = (req, res) => {
+export const create = async (req, res) => {
   // Validate request
   if (!req.body.qty) {
     res.status(400).send({
@@ -35,7 +34,7 @@ exports.create = (req, res) => {
     });
 };
 // Retrieve all Verkopes from the database.
-exports.findAll = (req, res) => {
+export const findAll = async (req, res) => {
     const id = req.query.id;
     var condition = id ? { id: { [Op.like]: `%${id}%` } } : null;
     Vrag.findAll({ where: condition })
@@ -50,7 +49,7 @@ exports.findAll = (req, res) => {
       });
 };
 // Find a single Vrag with an id
-exports.findOne = (req, res) => {
+export const findOne = async (req, res) => {
     const id = req.params.id;
     Vrag.findByPk(id)
       .then(data => {

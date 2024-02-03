@@ -1,9 +1,8 @@
-const db = require("../models");
-const Produsent = db.produsente;
-const Op = db.Sequelize.Op;
+import db from "../models/index.js"; 
+const { produsente: Produsent, Sequelize: { Op } } = db;
 
 // Create and Save a new Tutorial
-exports.create = (req, res) => {
+export const create = async (req, res) => {
   // Validate request
   if (!req.body.naam) {
     res.status(400).send({
@@ -30,7 +29,7 @@ exports.create = (req, res) => {
     });
 };
 // Retrieve all Tutorials from the database.
-exports.findAll = (req, res) => {
+export const findAll = async (req, res) => {
     const naam = req.query.naam;
     var condition = naam ? { naam: { [Op.like]: `%${naam}%` } } : null;
     Produsent.findAll({ where: condition })
@@ -45,7 +44,7 @@ exports.findAll = (req, res) => {
       });
 };
 // Find a single Tutorial with an id
-exports.findOne = (req, res) => {
+export const findOne = async (req, res) => {
     const id = req.params.id;
     Produsent.findByPk(id)
       .then(data => {

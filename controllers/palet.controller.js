@@ -1,9 +1,8 @@
-const db = require("../models");
-const Palet = db.palette;
-const Op = db.Sequelize.Op;
+import db from "../models/index.js"; 
+const { palette: Palet, Sequelize: { Op } } = db;
 
 // Create and Save a new Faktuur
-exports.create = (req, res) => {
+export const create = async (req, res) => {
   // Validate request
   if (!req.body.nommer) {
     res.status(400).send({
@@ -32,7 +31,7 @@ exports.create = (req, res) => {
     });
 };
 // Retrieve all Faktuurs from the database.
-exports.findAll = (req, res) => {
+export const findAll = async (req, res) => {
     const nommer = req.query.nommer;
     var condition = nommer ? { nommer: { [Op.like]: `%${nommer}%` } } : null;
     Palet.findAll({ where: condition })
@@ -47,7 +46,7 @@ exports.findAll = (req, res) => {
       });
 };
 // Find a single Palet with an id
-exports.findOne = (req, res) => {
+export const findOne = async (req, res) => {
     const id = req.params.id;
     Palet.findByPk(id)
       .then(data => {

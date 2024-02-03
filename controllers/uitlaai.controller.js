@@ -1,9 +1,8 @@
-const db = require("../models");
-const Uitlaai = db.uitlaaie;
-const Op = db.Sequelize.Op;
+import db from "../models/index.js"; 
+const { uitlaaie: Uitlaai, Sequelize: { Op } } = db;
 
 // Create and Save a new Faktuur
-exports.create = (req, res) => {
+export const create = async (req, res) => {
   // Validate request
   if (!req.body.datum) {
     res.status(400).send({
@@ -31,7 +30,7 @@ exports.create = (req, res) => {
     });
 };
 // Retrieve all Faktuurs from the database.
-exports.findAll = (req, res) => {
+export const findAll = async (req, res) => {
     const datum = req.query.datum;
     var condition = datum ? { datum: { [Op.like]: `%${datum}%` } } : null;
     Uitlaai.findAll({ where: condition })
@@ -46,7 +45,7 @@ exports.findAll = (req, res) => {
       });
 };
 // Find a single Prys with an id
-exports.findOne = (req, res) => {
+export const findOne = async (req, res) => {
     const id = req.params.id;
     Uitlaai.findByPk(id)
       .then(data => {

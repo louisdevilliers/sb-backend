@@ -1,4 +1,4 @@
-module.exports = (sequelize, Sequelize) => {
+export default (sequelize, Sequelize) => {
     const Uitlaai = sequelize.define("uitlaai", {
         id: {
             type: Sequelize.INTEGER,

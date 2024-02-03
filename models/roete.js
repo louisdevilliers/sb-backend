@@ -2,7 +2,7 @@
 
 //const Load = require("./load.js")
 
-module.exports = (sequelize, Sequelize) => {
+export default (sequelize, Sequelize) => {
     const Roete = sequelize.define("roete", {
       
         id: {

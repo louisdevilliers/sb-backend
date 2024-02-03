@@ -1,9 +1,9 @@
-const db = require("../models");
-const Tipe = db.tipes;
-const Op = db.Sequelize.Op;
+import db from "../models/index.js"; 
+const { tipes: Tipe, Sequelize: { Op } } = db;
+
 
 // Create and Save a new Faktuur
-exports.create = (req, res) => {
+export const create = async (req, res) => {
   // Validate request
   if (!req.body.tipe) {
     res.status(400).send({
@@ -30,7 +30,7 @@ exports.create = (req, res) => {
     });
 };
 // Retrieve all Faktuurs from the database.
-exports.findAll = (req, res) => {
+export const findAll = async (req, res) => {
     const tipe = req.query.tipe;
     var condition = tipe ? { tipe: { [Op.like]: `%${tipe}%` } } : null;
     Tipe.findAll({ where: condition })
@@ -45,7 +45,7 @@ exports.findAll = (req, res) => {
       });
 };
 // Find a single Prys with an id
-exports.findOne = (req, res) => {
+export const findOne = async (req, res) => {
     const id = req.params.id;
     Tipe.findByPk(id)
       .then(data => {

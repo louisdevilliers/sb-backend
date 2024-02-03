@@ -1,9 +1,8 @@
-const db = require("../models");
-const Plek = db.plekke;
-const Op = db.Sequelize.Op;
+import db from "../models/index.js"; 
+const { plekke: Plek, Sequelize: { Op } } = db;
 
 // Create and Save a new Faktuur
-exports.create = (req, res) => {
+export const create = async (req, res) => {
   // Validate request
   if (!req.body.naam) {
     res.status(400).send({
@@ -31,7 +30,7 @@ exports.create = (req, res) => {
     });
 };
 // Retrieve all Faktuurs from the database.
-exports.findAll = (req, res) => {
+export const findAll = async (req, res) => {
     const naam = req.query.naam;
     var condition = naam ? { naam: { [Op.like]: `%${naam}%` } } : null;
     Plek.findAll({ where: condition })
@@ -46,7 +45,7 @@ exports.findAll = (req, res) => {
       });
 };
 // Find a single Plek with an id
-exports.findOne = (req, res) => {
+export const findOne = async (req, res) => {
     const id = req.params.id;
     Plek.findByPk(id)
       .then(data => {

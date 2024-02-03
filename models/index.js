@@ -1,5 +1,7 @@
-const dbConfig = require("../config/db.config.js");
-const Sequelize = require("sequelize");
+import dbConfig from "../config/db.config.js"
+//const dbConfig = require("../config/db.config.js");
+//const Sequelize = require("sequelize");
+import Sequelize from 'sequelize'
 const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
   host: dbConfig.HOST,
   dialect: dbConfig.dialect,
@@ -14,7 +16,7 @@ const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
 const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
-
+/*
 db.bokse = require("./boks.js")(sequelize, Sequelize);
 db.fakture = require("./faktuur.js")(sequelize, Sequelize);
 db.kleure = require("./kleur.js")(sequelize, Sequelize);
@@ -35,6 +37,48 @@ db.verpakkings = require("./verpakking.js")(sequelize, Sequelize);
 db.vervoerders = require("./vervoerder.js")(sequelize, Sequelize);
 db.vragte = require("./vrag.js")(sequelize, Sequelize);
 db.weke = require("./week.js")(sequelize, Sequelize);
+*/
+import Boks from './boks.js';
+import faktuurModel from './faktuur.js';
+import kleurModel from './kleur.js';
+import kultivarModel from './kultivar.js';
+import loadModel from './load.js';
+import markModel from './mark.js';
+import transaksieModel from './transaksie.js';
+import paletModel from './palet.js';
+import plekModel from './plek.js';
+import produsentModel from './produsent.js';
+import prysModel from './prys.js';
+import roeteModel from './roete.js';
+import stackModel from './stack.js';
+import tipeModel from './tipe.js';
+import uitlaaiModel from './uitlaai.js';
+import verkopeModel from './verkope.js';
+import verpakkingModel from './verpakking.js';
+import vervoerderModel from './vervoerder.js';
+import vragModel from './vrag.js';
+import weekModel from './week.js';
+
+db.bokse = Boks(sequelize, Sequelize);
+db.fakture = faktuurModel(sequelize, Sequelize);
+db.kleure = kleurModel(sequelize, Sequelize);
+db.kultivars = kultivarModel(sequelize, Sequelize);
+db.loads = loadModel(sequelize, Sequelize);
+db.markte = markModel(sequelize, Sequelize);
+db.transaksies = transaksieModel(sequelize, Sequelize);
+db.palette = paletModel(sequelize, Sequelize);
+db.plekke = plekModel(sequelize, Sequelize);
+db.produsente = produsentModel(sequelize, Sequelize);
+db.pryse = prysModel(sequelize, Sequelize);
+db.roetes = roeteModel(sequelize, Sequelize);
+db.stacks = stackModel(sequelize, Sequelize);
+db.tipes = tipeModel(sequelize, Sequelize);
+db.uitlaaie = uitlaaiModel(sequelize, Sequelize);
+db.verkopes = verkopeModel(sequelize, Sequelize);
+db.verpakkings = verpakkingModel(sequelize, Sequelize);
+db.vervoerders = vervoerderModel(sequelize, Sequelize);
+db.vragte = vragModel(sequelize, Sequelize);
+db.weke = weekModel(sequelize, Sequelize);
 
 //Associations
 
@@ -212,7 +256,8 @@ db.transaksies.belongsTo(db.fakture, {
 //roetes does not have 'id'....?????!wtf
 //vragte double fks -> bokId, boksId, pryId, PrysId. WTF!???????
 
-module.exports = db;
+//module.exports = db;
+export default db;
 
 /* tuts index
 const dbConfig = require("../config/db.config.js");

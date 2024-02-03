@@ -30,7 +30,7 @@ exports.create = (req, res) => {
     });
 };
 // Retrieve all Tutorials from the database.
-exports.findAll = (req, res) => {
+export const findAll = async (req, res) => {
     const title = req.query.title;
     var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
     Tutorial.findAll({ where: condition })

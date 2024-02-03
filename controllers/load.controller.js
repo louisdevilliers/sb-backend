@@ -1,10 +1,8 @@
-const db = require("../models");
-const Load = db.loads;
-const Op = db.Sequelize.Op;
+import db from "../models/index.js"; 
+const { loads: Load, Sequelize: { Op } } = db;
 
 // Create and Save a new Faktuur
-exports.create = (req, res) => {
-  // Validate request
+export const create = async (req, res) => {  // Validate request
   if (!req.body.paletId) {
     res.status(400).send({
       message: "Content can not be empty!"
@@ -32,7 +30,7 @@ exports.create = (req, res) => {
     });
 };
 // Retrieve all Faktuurs from the database.
-exports.findAll = (req, res) => {
+export const findAll = async (req, res) => {
     const paletId = req.query.paletId;
     var condition = paletId ? { paletId: { [Op.like]: `%${paletId}%` } } : null;
     Load.findAll({ where: condition })
@@ -47,7 +45,7 @@ exports.findAll = (req, res) => {
       });
 };
 // Find a single Load with an id
-exports.findOne = (req, res) => {
+export const findOne = async (req, res) => {
     const id = req.params.id;
     Load.findByPk(id)
       .then(data => {

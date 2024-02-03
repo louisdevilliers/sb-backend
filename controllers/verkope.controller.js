@@ -1,9 +1,8 @@
-const db = require("../models");
-const Verkope = db.verkopes;
-const Op = db.Sequelize.Op;
+import db from "../models/index.js"; 
+const { verkopes: Verkope, Sequelize: { Op } } = db;
 
 // Create and Save a new Verkope
-exports.create = (req, res) => {
+export const create = async (req, res) => {
   // Validate request
   if (!req.body.qty) {
     res.status(400).send({
@@ -33,7 +32,7 @@ exports.create = (req, res) => {
     });
 };
 // Retrieve all Verkopes from the database.
-exports.findAll = (req, res) => {
+export const findAll = async (req, res) => {
     const qty = req.query.qty;
     var condition = qty ? { qty: { [Op.like]: `%${qty}%` } } : null;
     Verkope.findAll({ where: condition })
@@ -48,7 +47,7 @@ exports.findAll = (req, res) => {
       });
 };
 // Find a single Prys with an id
-exports.findOne = (req, res) => {
+export const findOne = async (req, res) => {
     const id = req.params.id;
     Verkope.findByPk(id)
       .then(data => {

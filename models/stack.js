@@ -1,4 +1,4 @@
-module.exports = (sequelize, Sequelize) => {
+export default (sequelize, Sequelize) => {
     const Stack = sequelize.define("stack", {
       id: {
         type: Sequelize.INTEGER,

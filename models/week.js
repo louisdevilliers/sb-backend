@@ -1,4 +1,4 @@
-module.exports = (sequelize, Sequelize) => {
+export default (sequelize, Sequelize) => {
     const Week = sequelize.define("week", {
       id: {
         type: Sequelize.INTEGER,

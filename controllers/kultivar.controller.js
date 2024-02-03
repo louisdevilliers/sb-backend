@@ -1,9 +1,8 @@
-const db = require("../models");
-const Kultivar = db.kultivars;
-const Op = db.Sequelize.Op;
+import db from "../models/index.js"; 
+const { kultivars: Kultivar, Sequelize: { Op } } = db;
 
 // Create and Save a new Tutorial
-exports.create = (req, res) => {
+export const create = async (req, res) => {
   // Validate request
   if (!req.body.naam) {
     res.status(400).send({
@@ -30,7 +29,7 @@ exports.create = (req, res) => {
     });
 };
 // Retrieve all Tutorials from the database.
-exports.findAll = (req, res) => {
+export const findAll = async (req, res) => {
     const naam = req.query.naam;
     var condition = naam ? { naam: { [Op.like]: `%${naam}%` } } : null;
     Kultivar.findAll({ where: condition })
@@ -63,7 +62,7 @@ exports.findAllByKleur = (req, res) => {
       });
 };
 // Find a single kultivar with an id
-exports.findOne = (req, res) => {
+export const findOne = async (req, res) => {
     const id = req.params.kultivarId;
     Kultivar.findByPk(id)
       .then(data => {

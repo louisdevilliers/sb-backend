@@ -1,3 +1,4 @@
+/*
 module.exports = app => {
     const bokse = require("../controllers/boks.controller.js");
     var router = require("express").Router();
@@ -17,3 +18,20 @@ module.exports = app => {
     //router.delete("/", bokse.deleteAll);
     app.use('/api/bokse', router);
   };
+  */
+  import { create, findAll, findOne }from '../controllers/boks.controller.js';
+  import express from 'express';
+  const router = express.Router();
+  
+  // Create a new Boks
+  router.post("/", create);
+  
+  // Retrieve all Bokse
+  router.get("/", findAll);
+  
+  // Other routes can be commented or uncommented as needed
+  
+  export default function(app) {
+      app.use('/api/bokse', router);
+  }
+  
