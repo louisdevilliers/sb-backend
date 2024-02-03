@@ -1,3 +1,4 @@
+/*
 module.exports = app => {
     const fakture = require("../controllers/faktuur.controller.js");
     var router = require("express").Router();
@@ -17,3 +18,24 @@ module.exports = app => {
     //router.delete("/", fakture.deleteAll);
     app.use('/api/fakture', router);
   };
+  */
+ // Import express and the controller functions
+import express from 'express';
+import { create, findAll, findOne, update, deleteOne, deleteAll } from '../controllers/faktuur.controller.js';
+
+const router = express.Router();
+
+// Setup routes
+router.post("/", create);
+router.get("/", findAll);
+// Uncomment as needed
+// router.get("/published", findAllPublished);
+router.get("/:id", findOne);
+//router.put("/:id", update);
+//router.delete("/:id", deleteOne);
+//router.delete("/", deleteAll);
+
+// Export a function to use these routes in the main app
+export default function(app) {
+    app.use('/api/fakture', router);
+}

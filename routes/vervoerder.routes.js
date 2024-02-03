@@ -1,19 +1,16 @@
-module.exports = app => {
-    const vervoerders = require("../controllers/vervoerder.controller.js");
-    var router = require("express").Router();
-    // Create a new Tutorial
-    router.post("/", vervoerders.create);
-    // Retrieve all Tutorials
-    router.get("/", vervoerders.findAll);
-    // Retrieve all published Tutorials
-    //router.get("/published", vervoerders.findAllPublished);
-    // Retrieve a single Tutorial with id
-    //router.get("/:id", vervoerders.findOne);
-    // Update a Tutorial with id
-    //router.put("/:id", vervoerders.update);
-    // Delete a Tutorial with id
-    //router.delete("/:id", vervoerders.delete);
-    // Delete all Tutorials
-    //router.delete("/", vervoerders.deleteAll);
-    app.use('/api/vervoerders', router);
-  };
+import express from "express";
+import {
+  create,
+  findAll,
+  findOne,
+} from "../controllers/vervoerder.controller.js";
+
+const router = express.Router();
+
+router.post("/", create);
+router.get("/", findAll);
+router.get("/:id", findOne);
+
+export default function (app) {
+  app.use("/api/vervoerders", router);
+}

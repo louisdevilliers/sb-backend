@@ -1,19 +1,15 @@
-module.exports = app => {
-    const kleure = require("../controllers/kleur.controller.js");
-    var router = require("express").Router();
-    // Create a new Tutorial
-    router.post("/", kleure.create);
-    // Retrieve all Tutorials
-    router.get("/", kleure.findAll);
-    // Retrieve all published Tutorials
-    //router.get("/published", kleure.findAllPublished);
-    // Retrieve a single Tutorial with id
-    router.get("/:id", kleure.findOne);
-    // Update a Tutorial with id
-    //router.put("/:id", kleure.update);
-    // Delete a Tutorial with id
-    //router.delete("/:id", kleure.delete);
-    // Delete all Tutorials
-    //router.delete("/", kleure.deleteAll);
+// Import express and the controller functions
+import express from 'express';
+import { create, findAll, findOne } from '../controllers/kleur.controller.js';
+
+const router = express.Router();
+
+// Setup routes
+router.post("/", create);          // Create a new Kleur
+router.get("/", findAll);          // Retrieve all Kleure
+router.get("/:id", findOne);       // Retrieve a single Kleur with id
+
+// Export a function to use these routes in the main app
+export default function(app) {
     app.use('/api/kleure', router);
-  };
+}
