@@ -45,7 +45,7 @@ export const findAll = async (req, res) => {
 };
 
 // Retrieve all Tutorials from the database.
-exports.findAllByKleur = (req, res) => {
+export const findAllByKleur = async (req, res) => {
   console.log("controller called")
   const kleurId = req.query.kleurId;
     const condition = kleurId ? { kleurId: { [Op.like]: `%${kleurId}%` } } : null;

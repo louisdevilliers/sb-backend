@@ -66,26 +66,3 @@ export const findOne = async (req, res) => {
         });
       });
 };
-
-exports.delete = (req, res) => {
-  const id = req.params.id;
-  Prys.destroy({
-    where: { id: id }
-  })
-    .then(num => {
-      if (num == 1) {
-        res.send({
-          message: "Prys was deleted successfully!"
-        });
-      } else {
-        res.send({
-          message: `Cannot delete Prys with id=${id}. Maybe Prys was not found!`
-        });
-      }
-    })
-    .catch(err => {
-      res.status(500).send({
-        message: "Could not delete Prys with id=" + id
-      });
-    });
-};

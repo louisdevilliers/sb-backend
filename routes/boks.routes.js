@@ -28,6 +28,7 @@ module.exports = app => {
   
   // Retrieve all Bokse
   router.get("/", findAll);
+  router.get("/:id", findOne);
   
   // Other routes can be commented or uncommented as needed
   

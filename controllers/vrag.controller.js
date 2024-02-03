@@ -67,8 +67,8 @@ export const findOne = async (req, res) => {
         });
       });
 };
+export const update = async (req, res) => {
 
-exports.update = (req, res) => {
   const id = req.params.id;
   Vrag.update(req.body, {
     where: { id: id }

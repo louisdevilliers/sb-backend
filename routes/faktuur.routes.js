@@ -21,7 +21,7 @@ module.exports = app => {
   */
  // Import express and the controller functions
 import express from 'express';
-import { create, findAll, findOne, update, deleteOne, deleteAll } from '../controllers/faktuur.controller.js';
+import { create, findAll, findOne} from '../controllers/faktuur.controller.js';
 
 const router = express.Router();
 
