@@ -15,7 +15,8 @@ app.use(cors());
 import db from "./models/index.js";
 //db.sequelize.sync();
 db.sequelize.sync().then(() => {
-  //{ force: true }
+  //{ force: true } //inside sync to drop all tables
+  //npx sequelize-cli db:seed:all //to seed data
   console.log("Drop and re-sync db.");
 });
 
