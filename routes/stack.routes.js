@@ -7,6 +7,4 @@ router.post("/", create);
 router.get("/", findAll);
 router.get("/:id", findOne);
 
-export default function (app) {
-  app.use("/api/stacks", router);
-}
+export default router;

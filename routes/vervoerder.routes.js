@@ -11,6 +11,4 @@ router.post("/", create);
 router.get("/", findAll);
 router.get("/:id", findOne);
 
-export default function (app) {
-  app.use("/api/vervoerders", router);
-}
+export default router;
