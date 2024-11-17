@@ -61,3 +61,16 @@ export const findOne = async (req, res) => {
         });
       });
 };
+
+//
+export const getAllMarkteForDropdown = async (req, res, next) => {
+  try {
+    const markteList = await Mark.findAll({
+      attributes: ['id', 'naam'] 
+    });
+    console.log("markteList",markteList);
+    res.json(markteList);
+  } catch (error) {
+    res.status(500).send({ message: 'Error fetching markte', error: error.toString() });
+  }
+};

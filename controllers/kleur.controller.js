@@ -62,3 +62,24 @@ export const findOne = async (req, res) => {
         });
       });
 };
+
+export const showAllKleure = async (req, res, next) => {
+  try {
+    const kleureList = await Kleur.findAll();
+    res.status(200).json(kleureList);
+  } catch (error) {
+    console.error('Error fetching kleure:', error);
+    res.status(500).json({ message: 'Error fetching kleure', error: error });
+  }
+};
+
+export const getAllKleureForDropdown = async (req, res, next) => {
+  try {
+    const kleureList = await Kleur.findAll({
+      attributes: ['id', 'naam'] 
+    });
+    res.json(kleureList);
+  } catch (error) {
+    res.status(500).send({ message: 'Error fetching kleure', error: error.toString() });
+  }
+};

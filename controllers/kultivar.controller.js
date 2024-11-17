@@ -27,7 +27,7 @@ export const create = async (req, res) => {
     .catch((err) => {
       res.status(500).send({
         message:
-          err.message || "Some error occurred while creating the Tutorial.",
+          err.message || "Some error occurred while creating the Kultivar.",
       });
     });
 };
@@ -49,20 +49,20 @@ export const findAll = async (req, res) => {
 
 // Retrieve all Tutorials from the database.
 export const findAllByKleur = async (req, res) => {
-  try {
-    console.log("controller called");
-    const kleurId = req.query.kleurId;
-    const condition = kleurId
-      ? { kleurId: { [Op.like]: `%${kleurId}%` } }
-      : null;
-
-    const data = await Kultivar.findAll({ where: condition });
-    res.send(data);
-  } catch (err) {
-    res.status(500).send({
-      message: err.message || "Some error occurred while retrieving kultivars.",
+  console.log("controller called");
+  const kleurId = req.query.kleurId;
+  const condition = kleurId ? { kleurId: { [Op.like]: `%${kleurId}%` } } : null;
+  Kultivar.findAll({ where: condition })
+    .then((data) => {
+      res.send(data);
+      //console.log("controller called")
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving kultivars.",
+      });
     });
-  }
 };
 // Find a single kultivar with an id
 export const findOne = async (req, res) => {
@@ -82,4 +82,20 @@ export const findOne = async (req, res) => {
         message: "Error retrieving Tutorial with id=" + id,
       });
     });
+};
+
+//
+
+export const getAllKultivarsForDropdown = async (req, res, next) => {
+  try {
+    const kultivarList = await Kultivar.findAll({
+      attributes: ["id", "naam", "kode"],
+    });
+    //console.log("kleureList",kultivarList);
+    res.json(kultivarList);
+  } catch (error) {
+    res
+      .status(500)
+      .send({ message: "Error fetching kleure", error: error.toString() });
+  }
 };

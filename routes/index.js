@@ -24,7 +24,7 @@ import weekRoutes from "./week.routes.js";
 
 const router = express.Router();
 
-router.use("/bokse", boksRoutes);
+router.use("/boks", boksRoutes);
 router.use("/faktuur", faktuurRoutes);
 router.use("/kleur", kleurRoutes);
 router.use("/kultivar", kultivarRoutes);

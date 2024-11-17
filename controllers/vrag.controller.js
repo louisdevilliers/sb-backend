@@ -6,33 +6,52 @@ const {
 
 // Create and Save a new Vrag
 export const create = async (req, res) => {
-  // Validate request
-  if (!req.body.qty) {
-    res.status(400).send({
-      message: "Content can not be empty!",
-    });
-    return;
-  }
-  // Create a Verpakking
-  const vrag = {
-    qty: req.body.qty,
-    kultivarId: req.body.kultivarId,
-    produsentId: req.body.produsentId,
-    prysId: req.body.prysId,
-    boksId: req.body.boksId,
-    faktuurId: req.body.faktuurId,
-    isConsumed: req.body.isConsumed,
-  };
-  // Stack Verpakking in the database
-  Vrag.create(vrag)
-    .then((data) => {
-      res.send(data);
-    })
-    .catch((err) => {
-      res.status(500).send({
-        message: err.message || "Some error occurred while creating the Vrag.",
+  try {
+    // Validate the request
+    console.log("req.body", req.body);
+    if (!req.body.faktuurNommer) {
+      return res.status(400).send({
+        message: "Must have faktuur nommer!",
       });
+    }
+
+    if (!req.body.vragte || !Array.isArray(req.body.vragte)) {
+      return res.status(400).send({
+        message: "Must have a valid 'vragte' array!",
+      });
+    }
+
+    // Create entries for each vrag
+    const faktuurNommer = req.body.faktuurNommer;
+    const weekId = req.body.weekId;
+    const vragte = req.body.vragte;
+
+    // Build the vragte entries
+    const vragteEntries = vragte.map((vrag) => ({
+      qty: vrag.qty,
+      kultivarId: vrag.kultivarId,
+      produsentId: vrag.produsentId,
+      boksId: vrag.boksId,
+      faktuurNommer, // Attach faktuurNommer
+      weekId, // Attach weekId if applicable
+      isConsumed: false, // Default value or based on logic
+    }));
+
+    // Bulk insert the vragte entries
+    const createdVragte = await Vrag.bulkCreate(vragteEntries);
+
+    // Respond with the created entries
+    return res.status(201).send({
+      message: "Vragte created successfully!",
+      data: createdVragte,
     });
+  } catch (error) {
+    console.error("Error creating vragte:", error);
+    return res.status(500).send({
+      message:
+        error.message || "Some error occurred while creating the vragte.",
+    });
+  }
 };
 // Retrieve all Verkopes from the database.
 export const findAll = async (req, res) => {
@@ -67,28 +86,25 @@ export const findOne = async (req, res) => {
       });
     });
 };
-
 export const update = async (req, res) => {
-  try {
-    const id = req.params.id;
-
-    const num = await Vrag.update(req.body, {
-      where: { id: id },
-    });
-
-    if (num[0] === 1) {
-      // Sequelize returns an array where the first element is the number of affected rows
-      res.send({
-        message: "Vrag was updated successfully.",
+  const id = req.params.id;
+  Vrag.update(req.body, {
+    where: { id: id },
+  })
+    .then((num) => {
+      if (num == 1) {
+        res.send({
+          message: "Vrag was updated successfully.",
+        });
+      } else {
+        res.send({
+          message: `Cannot update Vrag with id=${id}. Maybe Vrag was not found or req.body is empty!`,
+        });
+      }
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: "Error updating Vrag with id=" + id,
       });
-    } else {
-      res.status(404).send({
-        message: `Cannot update Vrag with id=${id}. Maybe Vrag was not found or req.body is empty!`,
-      });
-    }
-  } catch (err) {
-    res.status(500).send({
-      message: "Error updating Vrag with id=" + id,
     });
-  }
 };
