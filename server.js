@@ -1,18 +1,39 @@
 //const express = require("express");
 import express from "express";
 import cors from "cors"
+import kultivarRoutes from './routes/kultivar.routes.js';
+import produsentRoutes from './routes/produsent.routes.js';
+import kleurRoutes from './routes/kleur.routes.js';
+import weekRoutes from './routes/week.routes.js';
+import boksRoutes from './routes/boks.routes.js';
+import tipeRoutes from './routes/tipe.routes.js';
+import faktuurRoutes from './routes/faktuur.routes.js';
+import transaksieRoutes from './routes/transaksie.routes.js';
+import verpakkingRoutes from './routes/verpakking.routes.js';
+import verkopeRoutes from './routes/verkope.routes.js';
+import vervoerderRoutes from './routes/vervoerder.routes.js';
+import prysRoutes from './routes/prys.routes.js';
+import plekRoutes from './routes/plek.routes.js';
+import markRoutes from './routes/mark.routes.js';
+import loadRoutes from './routes/load.routes.js';
+import stackRoutes from './routes/stack.routes.js';
+import vragRoutes from './routes/vrag.routes.js';
+import paletRoutes from './routes/palet.routes.js';
+import roeteRoutes from './routes/roete.routes.js';
+import uitlaaiRoutes from './routes/uitlaai.routes.js';
+
 
 // const bodyParser = require("body-parser"); /* deprecated */
 //const cors = require("cors");
 
 const app = express();
-
+/*
 var corsOptions = {
-  origin: "http://localhost:8081"
+  origin: "http://localhost:3000"
 };
-
-app.use(cors(corsOptions));
-
+*/
+//app.use(cors(corsOptions));
+app.use(cors());
 // parse requests of content-type - application/json
 app.use(express.json());  /* bodyParser.json() is deprecated */
 
@@ -24,10 +45,30 @@ app.use(express.urlencoded({ extended: true }));   /* bodyParser.urlencoded() is
 import db from './models/index.js';
 
 
+kultivarRoutes(app);
+produsentRoutes(app);
+kleurRoutes(app);
+weekRoutes(app);
+boksRoutes(app);
+tipeRoutes(app);
+faktuurRoutes(app);
+transaksieRoutes(app);
+verpakkingRoutes(app);
+verkopeRoutes(app);
+vervoerderRoutes(app);
+prysRoutes(app);
+plekRoutes(app);
+markRoutes(app);
+loadRoutes(app);
+stackRoutes(app);
+vragRoutes(app);
+paletRoutes(app);
+roeteRoutes(app);
+uitlaaiRoutes(app);
 
 //db.sequelize.sync();
-db.sequelize.sync().then(() => { //{ force: true }
-  console.log("Drop and re-sync db.");
+db.sequelize.sync().then(() => { 
+  console.log("db sync.");
 });
 // // drop the table if it already exists
 // db.sequelize.sync({ force: true }).then(() => {
@@ -62,47 +103,7 @@ require("./routes/palet.routes.js")(app);
 require("./routes/roete.routes.js")(app);
 require("./routes/uitlaai.routes.js")(app);
 */
-import kultivarRoutes from './routes/kultivar.routes.js';
-import produsentRoutes from './routes/produsent.routes.js';
-import kleurRoutes from './routes/kleur.routes.js';
-import weekRoutes from './routes/week.routes.js';
-import boksRoutes from './routes/boks.routes.js';
-import tipeRoutes from './routes/tipe.routes.js';
-import faktuurRoutes from './routes/faktuur.routes.js';
-import transaksieRoutes from './routes/transaksie.routes.js';
-import verpakkingRoutes from './routes/verpakking.routes.js';
-import verkopeRoutes from './routes/verkope.routes.js';
-import vervoerderRoutes from './routes/vervoerder.routes.js';
-import prysRoutes from './routes/prys.routes.js';
-import plekRoutes from './routes/plek.routes.js';
-import markRoutes from './routes/mark.routes.js';
-import loadRoutes from './routes/load.routes.js';
-import stackRoutes from './routes/stack.routes.js';
-import vragRoutes from './routes/vrag.routes.js';
-import paletRoutes from './routes/palet.routes.js';
-import roeteRoutes from './routes/roete.routes.js';
-import uitlaaiRoutes from './routes/uitlaai.routes.js';
 
-kultivarRoutes(app);
-produsentRoutes(app);
-kleurRoutes(app);
-weekRoutes(app);
-boksRoutes(app);
-tipeRoutes(app);
-faktuurRoutes(app);
-transaksieRoutes(app);
-verpakkingRoutes(app);
-verkopeRoutes(app);
-vervoerderRoutes(app);
-prysRoutes(app);
-plekRoutes(app);
-markRoutes(app);
-loadRoutes(app);
-stackRoutes(app);
-vragRoutes(app);
-paletRoutes(app);
-roeteRoutes(app);
-uitlaaiRoutes(app);
 
 
 

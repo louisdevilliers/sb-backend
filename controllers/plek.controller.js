@@ -63,3 +63,17 @@ export const findOne = async (req, res) => {
         });
       });
 };
+
+//
+
+export const getAllPlekkeForDropdown = async (req, res, next) => {
+  try {
+    const plekkeList = await Plek.findAll({
+      attributes: ['id', 'naam'] 
+    });
+    console.log("plekkeList",plekkeList);
+    res.json(plekkeList);
+  } catch (error) {
+    res.status(500).send({ message: 'Error fetching plekke', error: error.toString() });
+  }
+};

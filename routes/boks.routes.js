@@ -19,7 +19,7 @@ module.exports = app => {
     app.use('/api/bokse', router);
   };
   */
-  import { create, findAll, findOne }from '../controllers/boks.controller.js';
+  import { create, findAll, findOne, getAllBokseForDropdown}from '../controllers/boks.controller.js';
   import express from 'express';
   const router = express.Router();
   
@@ -28,7 +28,8 @@ module.exports = app => {
   
   // Retrieve all Bokse
   router.get("/", findAll);
-  router.get("/:id", findOne);
+  router.get("/list", getAllBokseForDropdown);
+  //router.get("/:id", findOne);
   
   // Other routes can be commented or uncommented as needed
   

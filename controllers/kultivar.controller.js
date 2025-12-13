@@ -24,7 +24,7 @@ export const create = async (req, res) => {
     .catch(err => {
       res.status(500).send({
         message:
-          err.message || "Some error occurred while creating the Tutorial."
+          err.message || "Some error occurred while creating the Kultivar."
       });
     });
 };
@@ -79,4 +79,18 @@ export const findOne = async (req, res) => {
           message: "Error retrieving Tutorial with id=" + id
         });
       });
+};
+
+//
+
+export const getAllKultivarsForDropdown = async (req, res, next) => {
+  try {
+    const kultivarList = await Kultivar.findAll({
+      attributes: ['id', 'naam', 'kode'] 
+    });
+    console.log("kleureList",kultivarList);
+    res.json(kultivarList);
+  } catch (error) {
+    res.status(500).send({ message: 'Error fetching kleure', error: error.toString() });
+  }
 };

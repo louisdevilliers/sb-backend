@@ -62,3 +62,16 @@ export const findOne = async (req, res) => {
         });
       });
 };
+
+//
+
+export const getAllWekeForDropdown = async (req, res, next) => {
+  try {
+    const wekeList = await Week.findAll({
+      attributes: ['id', 'nommer', 'letter'] 
+    });
+    res.json(wekeList);
+  } catch (error) {
+    res.status(500).send({ message: 'Error fetching kleure', error: error.toString() });
+  }
+};

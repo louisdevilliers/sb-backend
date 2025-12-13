@@ -17,3 +17,6 @@ export default (sequelize, Sequelize) => {
   //vrag_id_fk
   //palet_id_fk
   
+  //add vragId foreign key -> aal stacks have been vragte, should maintain that ref
+  // sum of stacks.nbokse = vrag.qty for vrag.isConsumed
+  

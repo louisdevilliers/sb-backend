@@ -62,3 +62,17 @@ export const findOne = async (req, res) => {
         });
       });
 };
+
+//
+
+export const getAllProdusenteForDropdown = async (req, res, next) => {
+  try {
+    const produsenteList = await Produsent.findAll({
+      attributes: ['id', 'naam'] 
+    });
+    console.log("produsenteList",produsenteList);
+    res.json(produsenteList);
+  } catch (error) {
+    res.status(500).send({ message: 'Error fetching produsente', error: error.toString() });
+  }
+};

@@ -1,10 +1,11 @@
 import express from "express";
-import { create, findAll, findOne } from "../controllers/stack.controller.js";
+import { create, findAll, findOne, getAllStacksForDropdown} from "../controllers/stack.controller.js";
 
 const router = express.Router();
 
 router.post("/", create);
 router.get("/", findAll);
+router.get("/list", getAllStacksForDropdown);
 router.get("/:id", findOne);
 
 export default function (app) {

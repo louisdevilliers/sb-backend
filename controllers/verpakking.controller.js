@@ -62,3 +62,16 @@ export const findOne = async (req, res) => {
         });
       });
 };
+
+//
+export const getAllVerpakkingsForDropdown = async (req, res, next) => {
+  try {
+    const verpakkingsList = await Verpakking.findAll({
+      attributes: ['id', 'naam', 'prys'] 
+    });
+    console.log("verpakkingsList",verpakkingsList);
+    res.json(verpakkingsList);
+  } catch (error) {
+    res.status(500).send({ message: 'Error fetching verpakkings', error: error.toString() });
+  }
+};
