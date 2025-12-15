@@ -21,7 +21,7 @@ export const create = async (req, res) => {
     const faktuur = await db.fakture.create({
       nommer: faktuurNommer,
       datum: new Date(),
-      // tipeId: ? // If you have a specific type ID for 'ontvangs', add it here.
+      tipeId: 1 // DR Aankope
     });
 
     const createdVragte = [];
@@ -49,7 +49,14 @@ export const create = async (req, res) => {
         boksId: vragItem.boksId,
         prysId: prysId,
         faktuurId: faktuur.id,
-        isConsumed: false // Default
+        isConsumed: true // Default
+      });
+
+      // Create Stack for this Vrag
+      await db.stacks.create({
+        nbokse: vragItem.qty,
+        vragId: newVrag.id,
+        paletId: null
       });
 
       createdVragte.push(newVrag);

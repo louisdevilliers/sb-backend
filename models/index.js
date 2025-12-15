@@ -83,28 +83,28 @@ db.weke = weekModel(sequelize, Sequelize);
 //Associations
 
 //kultivars + kleure
-db.kleure.hasMany(db.kultivars, {as: "kultivars"});
+db.kleure.hasMany(db.kultivars, { as: "kultivars" });
 db.kultivars.belongsTo(db.kleure, {
   foreignKey: "kleurId",
   as: "kleur"
 });
 
 //fakture + tipes
-db.tipes.hasMany(db.fakture, {as: "fakture"});
+db.tipes.hasMany(db.fakture, { as: "fakture" });
 db.fakture.belongsTo(db.tipes, {
   foreignKey: "tipeId",
   as: "tipe"
 });
 
 //uitlaaie + vervoerders
-db.vervoerders.hasMany(db.uitlaaie, {as: "uitlaaie"});
+db.vervoerders.hasMany(db.uitlaaie, { as: "uitlaaie" });
 db.uitlaaie.belongsTo(db.vervoerders, {
   foreignKey: "vervoerderId",
   as: "vervoerder"
 });
 
 //verkopes + verpakkings
-db.verpakkings.hasMany(db.verkopes, {as: "verkopes"});
+db.verpakkings.hasMany(db.verkopes, { as: "verkopes" });
 db.verkopes.belongsTo(db.verpakkings, {
   foreignKey: "verpakkingId",
   as: "verpakking"
@@ -120,21 +120,21 @@ db.verkopes.belongsTo(db.verpakkings, {
 
 
 //loads + roetes
-db.roetes.hasMany(db.loads, {as: "loads"});
+db.roetes.hasMany(db.loads, { as: "loads" });
 db.loads.belongsTo(db.roetes, {
   foreignKey: "roeteId",
   as: "roete"
 });
 
 //roetes + plekke
-db.plekke.hasMany(db.roetes, {as: "roetes"});
+db.plekke.hasMany(db.roetes, { as: "roetes" });
 db.roetes.belongsTo(db.plekke, {
   foreignKey: "plekId",
   as: "plek"
 });
 
 //roetes + markte
-db.markte.hasMany(db.roetes, {as: "roetes"});
+db.markte.hasMany(db.roetes, { as: "roetes" });
 db.roetes.belongsTo(db.markte, {
   foreignKey: "markId",
   as: "markte"
@@ -142,14 +142,14 @@ db.roetes.belongsTo(db.markte, {
 
 
 //uitlaaie + loads
-db.uitlaaie.hasMany(db.loads, {as: "loads"});
+db.uitlaaie.hasMany(db.loads, { as: "loads" });
 db.loads.belongsTo(db.uitlaaie, {
   foreignKey: "uitlaaiId",
   as: "uitlaai"
 });
 
 //palette + loads
-db.palette.hasMany(db.loads, {as: "loads"});
+db.palette.hasMany(db.loads, { as: "loads" });
 db.loads.belongsTo(db.palette, {
   foreignKey: "paletId",
   as: "palet"
@@ -160,42 +160,42 @@ db.loads.belongsTo(db.palette, {
 //db.palette.belongsToMany(db.vragte, { through: "stacks" });
 
 //stacks + vragte
-db.vragte.hasMany(db.stacks, {as: "stacks"});
+db.vragte.hasMany(db.stacks, { as: "stacks" });
 db.stacks.belongsTo(db.vragte, {
   foreignKey: "vragId",
   as: "vrag"
 });
 
 //stacks + palette
-db.palette.hasMany(db.stacks, {as: "stacks"});
+db.palette.hasMany(db.stacks, { as: "stacks" });
 db.stacks.belongsTo(db.palette, {
   foreignKey: "paletId",
   as: "palet"
 });
 
 //vragte + kultivars
-db.kultivars.hasMany(db.vragte, {as: "vragte"});
+db.kultivars.hasMany(db.vragte, { as: "vragte" });
 db.vragte.belongsTo(db.kultivars, {
   foreignKey: "kultivarId",
   as: "kultivar"
 });
 
 //vragte + produsente
-db.produsente.hasMany(db.vragte, {as: "vragte"});
+db.produsente.hasMany(db.vragte, { as: "vragte" });
 db.vragte.belongsTo(db.produsente, {
   foreignKey: "produsentId",
   as: "produsent"
 });
 
 //vragte + pryse
-db.pryse.hasMany(db.vragte, {as: "vragte"});
+db.pryse.hasMany(db.vragte, { as: "vragte" });
 db.vragte.belongsTo(db.pryse, {
   foreignKey: "prysId",
   as: "prys"
 });
 
 //vragte + bokse
-db.bokse.hasMany(db.vragte, {as: "vragte"});
+db.bokse.hasMany(db.vragte, { as: "vragte" });
 db.vragte.belongsTo(db.bokse, {
   foreignKey: "boksId",
   as: "boks"
@@ -204,50 +204,57 @@ db.vragte.belongsTo(db.bokse, {
 //vragte + transaksies
 
 
-db.stacks.hasMany(db.transaksies, {as: "transaksies"});
+db.stacks.hasMany(db.transaksies, { as: "transaksies" });
 db.transaksies.belongsTo(db.stacks, {
   foreignKey: "stackId",
   as: "stack"
 });
 
 //pryse + weke
-db.weke.hasMany(db.pryse, {as: "pryse"});
+db.weke.hasMany(db.pryse, { as: "pryse" });
 db.pryse.belongsTo(db.weke, {
   foreignKey: "weekId",
   as: "week"
 });
 
 //pryse + kultivars
-db.kultivars.hasMany(db.pryse, {as: "pryse"});
+db.kultivars.hasMany(db.pryse, { as: "pryse" });
 db.pryse.belongsTo(db.kultivars, {
   foreignKey: "kultivarId",
   as: "kultivar"
 });
 
 //produsente + verkope
-db.produsente.hasMany(db.verkopes, {as: "verkopes"});
+db.produsente.hasMany(db.verkopes, { as: "verkopes" });
 db.verkopes.belongsTo(db.produsente, {
   foreignKey: "produsentId",
   as: "produsent"
 });
 
 //fakture + verkope
-db.fakture.hasMany(db.verkopes, {as: "verkopes"});
+db.fakture.hasMany(db.verkopes, { as: "verkopes" });
 db.verkopes.belongsTo(db.fakture, {
   foreignKey: "faktuurId",
   as: "faktuur"
 });
 
 //fakture + vragte
-db.fakture.hasMany(db.vragte, {as: "vragte"});
+db.fakture.hasMany(db.vragte, { as: "vragte" });
 db.vragte.belongsTo(db.fakture, {
   foreignKey: "faktuurId",
   as: "faktuur"
 });
 
 //transaksies + fakture
-db.fakture.hasMany(db.transaksies, {as: "transaksies"});
+db.fakture.hasMany(db.transaksies, { as: "transaksies" });
 db.transaksies.belongsTo(db.fakture, {
+  foreignKey: "faktuurId",
+  as: "faktuur"
+});
+
+//stacks + fakture
+db.fakture.hasMany(db.stacks, { as: "stacks" });
+db.stacks.belongsTo(db.fakture, {
   foreignKey: "faktuurId",
   as: "faktuur"
 });

@@ -8,6 +8,9 @@ export default (sequelize, Sequelize) => {
     },
       nbokse: {
         type: Sequelize.INTEGER
+      },
+      faktuurId: {
+        type: Sequelize.INTEGER
       }
       
     });

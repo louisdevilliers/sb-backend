@@ -67,7 +67,7 @@ roeteRoutes(app);
 uitlaaiRoutes(app);
 
 //db.sequelize.sync();
-db.sequelize.sync().then(() => { 
+db.sequelize.sync({ alter: true }).then(() => {
   console.log("db sync.");
 });
 // // drop the table if it already exists

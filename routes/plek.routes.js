@@ -4,8 +4,8 @@ import { create, findAll, findOne, getAllPlekkeForDropdown } from "../controller
 const router = express.Router();
 
 router.post("/", create);
-///router.get("/", findAll);
-router.get("/list", getAllPlekkeForDropdown);   
+router.get("/", findAll);
+router.get("/list", getAllPlekkeForDropdown);
 router.get("/:id", findOne);
 
 export default function (app) {
